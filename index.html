@@ -1,114 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brewed Awakening</title>
-    <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Solutions</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #problem-select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+    #problem-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #00529B;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Brewed Awakening</div>
-            <div class="nav-links">
-                <a href="#menu">Menu</a>
-                <a href="#about">About Us</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="hamburger">☰</div>
-        </nav>
-        <div class="hero">
-            <h1>Welcome to Brewed Awakening</h1>
-            <p>Where every sip tells a story</p>
-            <a href="#menu" class="cta-button">View Menu</a>
-        </div>
-    </header>
+  <h1>Select a Problem</h1>
+  <select id="problem-select">
+    <option value="">-- Select a Problem --</option>
+    <option value="1">ATM Withdrawal System</option>
+    <option value="2">Online Shopping Discount & Free Shipping</option>
+    <option value="3">Student Grading System with Extra Credit</option>
+    <option value="4">Smart Traffic Light System</option>
+    <option value="5">Movie Ticket Pricing with Time and Age Discount</option>
+    <option value="6">Job Application Filter</option>
+    <option value="7">E-commerce Coupon Redemption</option>
+    <option value="8">Fitness Membership Plan</option>
+    <option value="9">Electricity Bill Calculation with Peak Hours</option>
+    <option value="10">Flight Ticket Booking System</option>
+  </select>
+  
+  <div id="problem-container"></div>
 
-    <main>
-        <section id="menu" class="menu-section">
-            <h2>Our Menu</h2>
-            <div class="menu-container">
-                <div class="menu-category">
-                    <h3>Coffee Drinks</h3>
-                    <div class="menu-grid">
-                        <div class="menu-item">
-                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd" alt="Espresso">
-                            <h4>Espresso</h4>
-                            <p>Rich and bold single shot of espresso</p>
-                            <span class="price">$3.50</span>
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213" alt="Latte">
-                            <h4>Latte</h4>
-                            <p>Espresso with steamed milk and light foam</p>
-                            <span class="price">$4.50</span>
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d" alt="Cappuccino">
-                            <h4>Cappuccino</h4>
-                            <p>Equal parts espresso, steamed milk, and foam</p>
-                            <span class="price">$4.00</span>
-                        </div>
-                    </div>
-                </div>
+  <script>
+    const problemContainer = document.getElementById('problem-container');
+    const problemSelect = document.getElementById('problem-select');
 
-                <div class="menu-category">
-                    <h3>Breakfast Items</h3>
-                    <div class="menu-grid">
-                        <div class="menu-item">
-                            <img src="https://simply-delicious-food.com/wp-content/uploads/2020/07/Easy-salad-sandwiches-with-herb-mayo-5.jpg" alt="Breakfast Sandwich">
-                            <h4>Breakfast Sandwich</h4>
-                            <p>Eggs, cheese, and bacon on a croissant</p>
-                            <span class="price">$6.50</span>
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93" alt="Pancakes">
-                            <h4>Pancakes</h4>
-                            <p>Stack of fluffy pancakes with maple syrup</p>
-                            <span class="price">$8.00</span>
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8" alt="Avocado Toast">
-                            <h4>Avocado Toast</h4>
-                            <p>Smashed avocado on artisan bread</p>
-                            <span class="price">$7.50</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    const problems = {
+      1: {
+        html: `
+          <label for="balance">Balance:</label><input type="number" id="balance">
+          <label for="amount">Amount:</label><input type="number" id="amount">
+          <label for="pin">PIN:</label><input type="password" id="pin">
+          <label for="enteredPin">Entered PIN:</label><input type="password" id="enteredPin">
+          <button onclick="solveProblem(1)">Calculate</button>
+          <div id="result"></div>
+        `,
+        logic: atmWithdrawal
+      },
+      2: {
+        html: `
+          <label for="orderAmount">Order Amount:</label><input type="number" id="orderAmount">
+          <button onclick="solveProblem(2)">Calculate</button>
+          <div id="result"></div>
+        `,
+        logic: calculateFinalAmount
+      },
+      3: {
+        html: `
+          <label for="marks">Marks:</label><input type="number" id="marks">
+          <label for="attendance">Attendance (%):</label><input type="number" id="attendance">
+          <button onclick="solveProblem(3)">Calculate</button>
+          <div id="result"></div>
+        `,
+        logic: calculateGrade
+      },
+      // Add other problems here...
+    };
 
-        <section id="about" class="about-section">
-            <h2>About Us</h2>
-            <div class="about-content">
-                <p>Established in 2020, Brewed Awakening is more than just a coffee shop - it's a community hub where coffee lovers gather to enjoy expertly crafted beverages and delicious breakfast offerings. Our passion for quality coffee and exceptional service drives everything we do.</p>
-                <p>We source our beans from sustainable farms and roast them in-house to ensure the perfect cup every time. Our skilled baristas are dedicated to creating the perfect coffee experience for each customer who walks through our doors.</p>
-            </div>
-        </section>
+    problemSelect.addEventListener('change', () => {
+      const selectedProblem = problemSelect.value;
+      if (selectedProblem) {
+        problemContainer.innerHTML = problems[selectedProblem].html;
+        problemContainer.style.display = 'block';
+      } else {
+        problemContainer.innerHTML = '';
+        problemContainer.style.display = 'none';
+      }
+    });
 
-        <section id="contact" class="contact-section">
-            <h2>Contact Us</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-        </section>
-    </main>
+    function solveProblem(problemNumber) {
+      const inputs = problemContainer.querySelectorAll('input, select');
+      const values = Array.from(inputs).map(input => {
+        if (input.type === 'checkbox') return input.checked;
+        return input.value;
+      });
 
-    <footer>
-        <p>&copy; 2025 Brewed Awakening. All rights reserved.</p>
-    </footer>
+      const result = problems[problemNumber].logic(...values);
+      document.getElementById('result').textContent = result;
+    }
+
+    function atmWithdrawal(balance, amount, pin, enteredPin) {
+      balance = parseFloat(balance);
+      amount = parseFloat(amount);
+
+      if (pin !== enteredPin) return "Incorrect PIN";
+      if (amount > balance) return "Insufficient Funds";
+      if (amount % 100 !== 0) return "Enter amount in multiples of 100";
+      
+      balance -= amount;
+      return `Withdrawal successful! Remaining balance: ${balance.toFixed(2)}`;
+    }
+
+    function calculateFinalAmount(orderAmount) {
+      orderAmount = parseFloat(orderAmount);
+      let discount = 0, shipping = 0;
+
+      if (orderAmount > 1000) discount = 0.20;
+      else if (orderAmount >= 500) discount = 0.10;
+
+      let finalAmount = orderAmount * (1 - discount);
+      shipping = finalAmount > 50 ? 0 : 10;
+
+      return `Final amount after discount and shipping: $${(finalAmount + shipping).toFixed(2)}`;
+    }
+
+    function calculateGrade(marks, attendance) {
+      marks = parseFloat(marks);
+      attendance = parseFloat(attendance);
+      if (attendance > 90) marks += 5;
+
+      let grade = "F";
+      if (marks >= 90) grade = "A";
+      else if (marks >= 80) grade = "B";
+      else if (marks >= 70) grade = "C";
+      else if (marks >= 60) grade = "D";
+
+      return `Final Grade: ${grade}`;
+    }
+
+    // Add logic for other problems...
+  </script>
 </body>
 </html>
