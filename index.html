@@ -1,173 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Problem Solutions</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    #problem-select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      box-sizing: border-box;
-    }
-    #problem-container {
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 5px;
-      display: none;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    #result {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #00529B;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAHITHA'S E-COMMERCE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-  <h1>Select a Problem</h1>
-  <select id="problem-select">
-    <option value="">-- Select a Problem --</option>
-    <option value="1">ATM Withdrawal System</option>
-    <option value="2">Online Shopping Discount & Free Shipping</option>
-    <option value="3">Student Grading System with Extra Credit</option>
-    <option value="4">Smart Traffic Light System</option>
-    <option value="5">Movie Ticket Pricing with Time and Age Discount</option>
-    <option value="6">Job Application Filter</option>
-    <option value="7">E-commerce Coupon Redemption</option>
-    <option value="8">Fitness Membership Plan</option>
-    <option value="9">Electricity Bill Calculation with Peak Hours</option>
-    <option value="10">Flight Ticket Booking System</option>
-  </select>
-  
-  <div id="problem-container"></div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">SAHITHA'S E-COMMERCE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" href="#"
+                                onclick="filterCategory('All')">All</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"
+                                onclick="filterCategory('Mobiles')">Mobiles</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"
+                                onclick="filterCategory('Laptops')">Laptops</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"
+                                onclick="filterCategory('Accessories')">Accessories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"
+                                onclick="filterCategory('Food')">Food</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"
+                                onclick="filterCategory('Electronics')">Electronics</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <input type="text" id="searchBar" class="form-control me-2" placeholder="Search products..."
+                            onkeyup="searchProducts()">
+                        <button class="btn btn-outline-dark position-relative cart-toggle">
+                            <i class="bi bi-cart3"></i>
+                            <span class="cart-count badge bg-danger" id="cartCount">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <script>
-    const problemContainer = document.getElementById('problem-container');
-    const problemSelect = document.getElementById('problem-select');
+    <main class="container mt-5 pt-5 main-content">
+        <h2 class="text-center mb-4">PRODUCTS</h2>
+        <div class="row" id="productList">
+            </div>
+    </main>
 
-    const problems = {
-      1: {
-        html: `
-          <label for="balance">Balance:</label><input type="number" id="balance">
-          <label for="amount">Amount:</label><input type="number" id="amount">
-          <label for="pin">PIN:</label><input type="password" id="pin">
-          <label for="enteredPin">Entered PIN:</label><input type="password" id="enteredPin">
-          <button onclick="solveProblem(1)">Calculate</button>
-          <div id="result"></div>
-        `,
-        logic: atmWithdrawal
-      },
-      2: {
-        html: `
-          <label for="orderAmount">Order Amount:</label><input type="number" id="orderAmount">
-          <button onclick="solveProblem(2)">Calculate</button>
-          <div id="result"></div>
-        `,
-        logic: calculateFinalAmount
-      },
-      3: {
-        html: `
-          <label for="marks">Marks:</label><input type="number" id="marks">
-          <label for="attendance">Attendance (%):</label><input type="number" id="attendance">
-          <button onclick="solveProblem(3)">Calculate</button>
-          <div id="result"></div>
-        `,
-        logic: calculateGrade
-      },
-      // Add other problems here...
-    };
+    <div id="cartOverlay" class="cart-overlay"></div> <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>SHOPPING CART</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            </div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total:</span>
+                <span id="cartTotal">₹0.00</span>
+            </div>
+            <button class="btn btn-primary w-100" id="checkoutBtn">Checkout</button>
+        </div>
+    </aside>
 
-    problemSelect.addEventListener('change', () => {
-      const selectedProblem = problemSelect.value;
-      if (selectedProblem) {
-        problemContainer.innerHTML = problems[selectedProblem].html;
-        problemContainer.style.display = 'block';
-      } else {
-        problemContainer.innerHTML = '';
-        problemContainer.style.display = 'none';
-      }
-    });
 
-    function solveProblem(problemNumber) {
-      const inputs = problemContainer.querySelectorAll('input, select');
-      const values = Array.from(inputs).map(input => {
-        if (input.type === 'checkbox') return input.checked;
-        return input.value;
-      });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-      const result = problems[problemNumber].logic(...values);
-      document.getElementById('result').textContent = result;
-    }
+    <footer class="text-center py-3">
+        <p>&copy; 2025 Innomatics Research Labs. All rights reserved by <a
+                href="https://www.linkedin.com/in/sahitha-madapala-77b7b0258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank">Sahitha Madapala</a>. ❤️</p>
+    </footer>
 
-    function atmWithdrawal(balance, amount, pin, enteredPin) {
-      balance = parseFloat(balance);
-      amount = parseFloat(amount);
-
-      if (pin !== enteredPin) return "Incorrect PIN";
-      if (amount > balance) return "Insufficient Funds";
-      if (amount % 100 !== 0) return "Enter amount in multiples of 100";
-      
-      balance -= amount;
-      return `Withdrawal successful! Remaining balance: ${balance.toFixed(2)}`;
-    }
-
-    function calculateFinalAmount(orderAmount) {
-      orderAmount = parseFloat(orderAmount);
-      let discount = 0, shipping = 0;
-
-      if (orderAmount > 1000) discount = 0.20;
-      else if (orderAmount >= 500) discount = 0.10;
-
-      let finalAmount = orderAmount * (1 - discount);
-      shipping = finalAmount > 50 ? 0 : 10;
-
-      return `Final amount after discount and shipping: $${(finalAmount + shipping).toFixed(2)}`;
-    }
-
-    function calculateGrade(marks, attendance) {
-      marks = parseFloat(marks);
-      attendance = parseFloat(attendance);
-      if (attendance > 90) marks += 5;
-
-      let grade = "F";
-      if (marks >= 90) grade = "A";
-      else if (marks >= 80) grade = "B";
-      else if (marks >= 70) grade = "C";
-      else if (marks >= 60) grade = "D";
-
-      return `Final Grade: ${grade}`;
-    }
-
-    // Add logic for other problems...
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./script.js"></script>
 </body>
+
 </html>
