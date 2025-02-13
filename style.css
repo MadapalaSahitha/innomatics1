@@ -1,102 +1,106 @@
-/* style.css */
-:root {
-    --cart-width: 350px;
-    --navbar-height: 60px;
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-}
-
 body {
-    padding-top: var(--navbar-height);
+    font-family: Arial, sans-serif;
     margin: 0;
-    overflow-x: hidden;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Navbar */
-.navbar-brand {
-    font-weight: bold;
-}
-
-/* Main Content */
-.main-content {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Cart Toggle */
-.cart-toggle {
-    background: none;
-    border: none;
-    position: relative;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: transform 0.2s ease;
-}
-
-.cart-toggle:hover {
-    transform: scale(1.1);
-}
-
-.cart-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #dc3545;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
     color: white;
-    border-radius: 50%;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
-    transform: scale(0);
-    transition: transform 0.3s ease;
-}
-
-.cart-count.active {
-    transform: scale(1);
-}
-
-/* Cart Sidebar */
-.cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -var(--cart-width);
-    width: var(--cart-width);
-    background-color: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1050;
+    padding: 10px 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.cart-sidebar.active {
-    right: 0;
-}
-
-/* Cart Overlay */
-.cart-overlay {
+    gap: 20px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .cart-icon {
+    cursor: pointer;
+    margin-left: auto;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .cart {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: -300px;
+    width: 300px;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease-in-out;
-    z-index: 1040;
-    backdrop-filter: blur(3px);
-}
-
-.cart-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ... (rest of the CSS styles for cart header, items, footer, products, etc. - as in previous examples) */
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-    /* ... (mobile styles as in previous examples) */
-}
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+  }
+  
+  .cart.active {
+    right: 0;
+  }
+  
+  #cart-items {
+    margin-bottom: 20px;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .cart-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .cart-item button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .cart {
+      right: 0;
+      bottom: -100%;
+      top: auto;
+      width: 100%;
+      height: 300px;
+      transition: bottom 0.3s ease;
+    }
+  
+    .cart.active {
+      bottom: 0;
+    }
+  }
